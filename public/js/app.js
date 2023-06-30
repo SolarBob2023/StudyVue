@@ -5106,42 +5106,22 @@ __webpack_require__.r(__webpack_exports__);
   name: "PostComponent",
   data: function data() {
     return {
-      persons: [{
-        id: 1,
-        name: 'Robert',
-        age: 25,
-        job: 'soldier'
-      }, {
-        id: 2,
-        name: 'Sasha',
-        age: 20,
-        job: 'builder'
-      }, {
-        id: 3,
-        name: 'Nikita',
-        age: 23,
-        job: 'trader'
-      }, {
-        id: 4,
-        name: 'Katya',
-        age: 23,
-        job: 'trader'
-      }, {
-        id: 5,
-        name: 'Dasha',
-        age: 21,
-        job: 'trader'
-      }]
+      persons: null
     };
   },
-  methods: {},
-  computed: {
-    personAgeMoreTwenty: function personAgeMoreTwenty() {
-      return this.persons.filter(function (person) {
-        return person.age > 20;
-      });
+  mounted: function mounted() {
+    this.getPersons();
+  },
+  methods: {
+    getPersons: function getPersons() {
+      var _this = this;
+      axios.get('/persons').then(function (data) {
+        console.log(data.data);
+        _this.persons = data.data;
+      })["catch"](function (error) {})["finally"](function (finaly) {});
     }
   },
+  computed: {},
   components: {
     SinglePostComponent: _SinglePostComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -27290,7 +27270,7 @@ var render = function () {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.personAgeMoreTwenty, function (person) {
+          _vm._l(_vm.persons, function (person) {
             return _c("tr", [
               _c("th", { attrs: { scope: "row" } }, [
                 _vm._v(_vm._s(person.id)),
