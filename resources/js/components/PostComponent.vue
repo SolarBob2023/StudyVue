@@ -1,10 +1,24 @@
 <template>
     <div>
         <SinglePostComponent></SinglePostComponent>
-        <div>Name : {{ name }}</div>
-        <div>Job : {{ myJob }}</div>
-        <button @click="sayHello">Hello</button>
-        <button @click="sayHi">Hi</button>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Job</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="person in persons">
+                <th scope="row">{{ person.id }}</th>
+                <td>{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+                <td>{{ person.job }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -15,24 +29,37 @@ export default {
 
     data() {
         return {
-            name : 'robert',
-            age : 20
+            persons: [
+                {
+                    id: 1,
+                    name: 'Robert',
+                    age: 25,
+                    job: 'soldier',
+                },
+                {
+                    id: 2,
+                    name: 'Sasha',
+                    age: 20,
+                    job: 'builder',
+                },
+                {
+                    id: 4,
+                    name: 'Nikita',
+                    age: 23,
+                    job: 'trader',
+                },
+
+            ],
+
         }
     },
 
     methods: {
-        sayHello(){
-            console.log('Hello')
-        },
-        sayHi(){
-            console.log('Hi')
-        }
+
     },
 
     computed: {
-        myJob(){
-            return this.name + ' is ' + 'soldier'
-        }
+
     },
 
     components : {
