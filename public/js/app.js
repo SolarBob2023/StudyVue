@@ -5117,15 +5117,31 @@ __webpack_require__.r(__webpack_exports__);
         age: 20,
         job: 'builder'
       }, {
-        id: 4,
+        id: 3,
         name: 'Nikita',
         age: 23,
+        job: 'trader'
+      }, {
+        id: 4,
+        name: 'Katya',
+        age: 23,
+        job: 'trader'
+      }, {
+        id: 5,
+        name: 'Dasha',
+        age: 21,
         job: 'trader'
       }]
     };
   },
   methods: {},
-  computed: {},
+  computed: {
+    personAgeMoreTwenty: function personAgeMoreTwenty() {
+      return this.persons.filter(function (person) {
+        return person.age > 20;
+      });
+    }
+  },
   components: {
     SinglePostComponent: _SinglePostComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -27274,7 +27290,7 @@ var render = function () {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.persons, function (person) {
+          _vm._l(_vm.personAgeMoreTwenty, function (person) {
             return _c("tr", [
               _c("th", { attrs: { scope: "row" } }, [
                 _vm._v(_vm._s(person.id)),
