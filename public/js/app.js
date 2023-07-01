@@ -5165,6 +5165,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5188,7 +5190,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.people = res.data;
       });
     },
-    updatePeople: function updatePeople(id) {
+    updatePerson: function updatePerson(id) {
       var _this2 = this;
       this.editPersonId = null;
       axios.patch("api/people/".concat(id), {
@@ -5197,6 +5199,13 @@ __webpack_require__.r(__webpack_exports__);
         job: this.job
       }).then(function (res) {
         _this2.getPeople();
+      });
+    },
+    deletePerson: function deletePerson(id) {
+      var _this3 = this;
+      this.editPersonId = null;
+      axios["delete"]("api/people/".concat(id)).then(function (res) {
+        _this3.getPeople();
       });
     },
     changeEditPersonId: function changeEditPersonId(id, name, age, job) {
@@ -27766,6 +27775,23 @@ var render = function () {
                   [_vm._v("Edit")]
                 ),
               ]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { href: "" },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.deletePerson(person.id)
+                      },
+                    },
+                  },
+                  [_vm._v("Delete")]
+                ),
+              ]),
             ]),
             _vm._v(" "),
             _c("tr", { class: _vm.isEdited(person.id) ? "" : "d-none" }, [
@@ -27849,7 +27875,7 @@ var render = function () {
                     on: {
                       click: function ($event) {
                         $event.preventDefault()
-                        return _vm.updatePeople(person.id)
+                        return _vm.updatePerson(person.id)
                       },
                     },
                   },
@@ -27879,7 +27905,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Job")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Action")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Edit")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Delete")]),
       ]),
     ])
   },

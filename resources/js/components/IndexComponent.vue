@@ -6,7 +6,8 @@
             <th scope="col">Name</th>
             <th scope="col">Age</th>
             <th scope="col">Job</th>
-            <th scope="col">Action</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -17,13 +18,14 @@
                 <td>{{ person.age }}</td>
                 <td>{{ person.job }}</td>
                 <td><a href="" @click.prevent="changeEditPersonId(person.id, person.name, person.age, person.job)" class="btn btn-primary">Edit</a></td>
+                <td><a href="" @click.prevent="deletePerson(person.id)" class="btn btn-danger">Delete</a></td>
             </tr>
             <tr :class="isEdited(person.id) ? '' : 'd-none'">
                 <th scope="row"></th>
                 <td><input type="text" v-model="name"></td>
                 <td><input type="number" v-model="age"></td>
                 <td><input type="text" v-model="job"></td>
-                <td><a href="" @click.prevent="updatePeople(person.id)" class="btn btn-primary">Update</a></td>
+                <td><a href="" @click.prevent="updatePerson(person.id)" class="btn btn-primary">Update</a></td>
             </tr>
         </template>
         </tbody>
@@ -57,9 +59,16 @@ export default {
                     this.people = res.data
                 })
         },
-        updatePeople(id){
+        updatePerson(id){
             this.editPersonId = null
             axios.patch(`api/people/${id}`, {name : this.name, age : this.age, job : this.job})
+                .then( res => {
+                    this.getPeople()
+                })
+        },
+        deletePerson(id){
+            this.editPersonId = null
+            axios.delete(`api/people/${id}`)
                 .then( res => {
                     this.getPeople()
                 })
