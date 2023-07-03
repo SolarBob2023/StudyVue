@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Person;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\StoreRequest;
+use App\Http\Resources\Person\PersonResource;
 use App\Models\Person;
 
 class StoreController extends Controller
@@ -12,6 +13,6 @@ class StoreController extends Controller
     {
         $data = $request->validated();
         $person = Person::create($data);
-        return $person;
+        return PersonResource::make($person);
     }
 }
