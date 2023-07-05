@@ -1,8 +1,8 @@
 <template>
     <div v-if="person">
-        <div> Name: {{ this.person.name }}</div>
-        <div> Age: {{ this.person.age }}</div>
-        <div> Job: {{ this.person.job }}</div>
+        <div> Name: {{ person.name }}</div>
+        <div> Age: {{ person.age }}</div>
+        <div> Job: {{ person.job }}</div>
         <router-link class="btn btn-primary" :to="{ name : 'person.edit', params : {id : person.id}}">Edit</router-link>
     </div>
 </template>
@@ -12,19 +12,19 @@ export default {
     name: "Show",
     data() {
         return {
-            person : null
         }
     },
     mounted() {
-        this.getPerson()
+        this.$store.dispatch('getPerson', this.$route.params.id)
     },
     methods : {
-        getPerson(){
-            axios.get(`/api/people/${this.$route.params.id}`)
-                .then( res => {
-                    this.person = res.data.data
-                })
-        },
+
+    },
+
+    computed : {
+        person(){
+            return this.$store.getters.person
+        }
     }
 }
 </script>
